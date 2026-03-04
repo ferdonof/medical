@@ -71,7 +71,11 @@
 				<artifactId>postgresql</artifactId>
 				<version>${testcontainers.version}</version>
 			</dependency>
-
+			<dependency>
+				<groupId>org.camunda.bpm.springboot</groupId>
+				<artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
+				<version>7.24.0</version>
+			</dependency>
 		</dependencies>
     </dependencyManagement>
 
