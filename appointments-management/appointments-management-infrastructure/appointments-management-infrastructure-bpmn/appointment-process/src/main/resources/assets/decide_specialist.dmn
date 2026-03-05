@@ -1,25 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/"
-             xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/"
-             xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn"
-             xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="decide_specialist_dmn" name="DRD"
-             namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.12.0">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="decide_specialist_dmn" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.12.0">
   <decision id="decide_specialist" name="Specialist decision">
     <decisionTable id="DecisionTable_0smm6fs">
       <input id="Input_1" label="Has Fever" biodi:width="192" camunda:inputVariable="hasFever">
         <inputExpression id="InputExpression_1" typeRef="string" expressionLanguage="javascript">
           <text>var result = 'No';
 
-            if (temperature &gt; 39.0){
-            result = 'High';
-            } else if(temperature &gt; 37.5) {
-            result = 'Yes';
-            }else if(temperature &gt; 37.0) {
-            result = 'Low-Grade';
-            }
+if (temperature &gt; 39.0){
+   result = 'High';
+} else if(temperature &gt; 37.5) {
+   result = 'Yes';
+}else if(temperature &gt; 37.0) {
+   result = 'Low-Grade';
+}
 
-            result;
-          </text>
+result;</text>
         </inputExpression>
         <inputValues id="UnaryTests_1lmuvaw">
           <text>"Yes","No","High","Low-Grade"</text>
@@ -29,24 +24,23 @@
         <inputExpression id="LiteralExpression_0nbbjmi" typeRef="string" expressionLanguage="javascript">
           <text>var result = 'No';
 
-            if (coughFrequencyPerHour &gt; 30) {
-            result = 'Chronic';
-            } else if (coughFrequencyPerHour &gt; 10) {
-            result = 'Yes';
-            }
+if (coughFrequencyPerHour &gt; 30) {
+  result = 'Chronic';
+} else if (coughFrequencyPerHour &gt; 10) {
+   result = 'Yes';
+}
 
-            result;
-          </text>
+result;
+</text>
         </inputExpression>
         <inputValues id="UnaryTests_19u07yu">
           <text>"Yes","No","Chronic"</text>
         </inputValues>
       </input>
-      <input id="InputClause_1r4r4rb" label="Has Chest Pain" camunda:inputVariable="hasChestPain">
+      <input id="InputClause_1r4r4rb" label="Has Chest Pain" biodi:width="192" camunda:inputVariable="hasChestPain">
         <inputExpression id="LiteralExpression_0jlh9my" typeRef="string" expressionLanguage="javascript">
           <text>var result = chestPainType;
-            result;
-          </text>
+result;</text>
         </inputExpression>
         <inputValues id="UnaryTests_13d9oag">
           <text>"Yes","No","Sometimes","Severe"</text>
@@ -55,8 +49,7 @@
       <input id="InputClause_1of91gl" label="Has Fatigue" camunda:inputVariable="hasFatigue">
         <inputExpression id="LiteralExpression_0ria5d9" typeRef="string" expressionLanguage="javascript">
           <text>var result = fatigueType;
-            result;
-          </text>
+result;</text>
         </inputExpression>
         <inputValues id="UnaryTests_1mgdm8n">
           <text>"Yes","No","Severe"</text>
@@ -65,19 +58,17 @@
       <input id="InputClause_1yq2klq" label="Has weight Loss" camunda:inputVariable="withWeightLoss">
         <inputExpression id="LiteralExpression_1ez737j" typeRef="boolean" expressionLanguage="javascript">
           <text>var result = hasWeightLoss;
-            result;
-          </text>
+result;</text>
         </inputExpression>
       </input>
       <input id="InputClause_1nytqxt" label="Has Neck Stiffness" camunda:inputVariable="withNeckStiffness">
         <inputExpression id="LiteralExpression_1cb9h8u" typeRef="boolean" expressionLanguage="javascript">
           <text>var result = hasNeckStiffness;
-            result;
-          </text>
+result;</text>
         </inputExpression>
       </input>
-      <output id="Output_1" label="Disease" name="disease" typeRef="string"/>
-      <output id="OutputClause_0qr9qwk" label="Specialist" name="specialist" typeRef="string"/>
+      <output id="Output_1" label="Disease" name="disease" typeRef="string" />
+      <output id="OutputClause_0qr9qwk" label="Specialist" name="specialist" typeRef="string" />
       <rule id="DecisionRule_1tmzcqg">
         <inputEntry id="UnaryTests_0cy63pv">
           <text>Yes</text>
@@ -98,10 +89,10 @@
           <text>false</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1w0ld4v">
-          <text>Influenza</text>
+          <text>"Influenza"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0wlcnzz">
-          <text>General Practitioner</text>
+          <text>"General Practitioner"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1dtpzhk">
@@ -124,10 +115,10 @@
           <text>false</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_13atb8g">
-          <text>Covid-19</text>
+          <text>"Covid-19"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1e3qzm2">
-          <text>Pulmonologist</text>
+          <text>"Pulmonologist"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_19pl9x1">
@@ -150,10 +141,10 @@
           <text>false</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1xudn0z">
-          <text>Pneumonia</text>
+          <text>"Pneumonia"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0kvdk00">
-          <text>Pulmonologist</text>
+          <text>"Pulmonologist"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0hvruyj">
@@ -176,10 +167,10 @@
           <text>false</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0kjjioa">
-          <text>Tuberculosis</text>
+          <text>"Tuberculosis"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0tkvklr">
-          <text>Infectious Disease Specialist</text>
+          <text>"Infectious Disease Specialist"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1ici09b">
@@ -202,10 +193,10 @@
           <text>false</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0ktd4po">
-          <text>Mononucleosis</text>
+          <text>"Mononucleosis"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1y8q0ma">
-          <text>Internal Medicine</text>
+          <text>"Internal Medicine"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_000np9e">
@@ -228,10 +219,10 @@
           <text>true</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1kqwqxi">
-          <text>Meningitis</text>
+          <text>"Meningitis"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0csnf2j">
-          <text>Neurologist</text>
+          <text>"Neurologist"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0nm50hh">
@@ -254,10 +245,10 @@
           <text>false</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0jfybbp">
-          <text>Myocardial Infarction</text>
+          <text>"Myocardial Infarction"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1paknp1">
-          <text>Cardiologist</text>
+          <text>"Cardiologist"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1soept8">
@@ -280,10 +271,10 @@
           <text>false</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0rug9ii">
-          <text>Pericarditis</text>
+          <text>"Pericarditis"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0dip176">
-          <text>Cardiologist</text>
+          <text>"Cardiologist"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1ytsb8l">
@@ -306,10 +297,10 @@
           <text>false</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0xlcrpt">
-          <text>Panic Attack</text>
+          <text>"Panic Attack"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0gq0xst">
-          <text>Psychiatrist</text>
+          <text>"Psychiatrist"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_00j2e6i">
@@ -332,10 +323,10 @@
           <text>false</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0tih4md">
-          <text>Hyperthyroidism</text>
+          <text>"Hyperthyroidism"</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1o5uahj">
-          <text>Endocrinologist</text>
+          <text>"Endocrinologist"</text>
         </outputEntry>
       </rule>
     </decisionTable>
@@ -343,7 +334,7 @@
   <dmndi:DMNDI>
     <dmndi:DMNDiagram>
       <dmndi:DMNShape dmnElementRef="decide_specialist">
-        <dc:Bounds height="80" width="180" x="160" y="100"/>
+        <dc:Bounds height="80" width="180" x="160" y="100" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>
