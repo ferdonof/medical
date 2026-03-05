@@ -18,6 +18,9 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+  liquibase:
+    change-log: classpath:/db/changelog/changelog.xml
+
 
 camunda:
   bpm:
