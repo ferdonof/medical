@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="decide_specialist_dmn" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.12.0">
   <decision id="decide_specialist" name="Specialist decision">
-    <decisionTable id="DecisionTable_0smm6fs">
+    <decisionTable id="DecisionTable_0smm6fs" hitPolicy="FIRST">
       <input id="Input_1" label="Has Fever" biodi:width="192" camunda:inputVariable="hasFever">
         <inputExpression id="InputExpression_1" typeRef="string" expressionLanguage="javascript">
           <text>var result = 'No';
@@ -68,7 +68,7 @@ result;</text>
         </inputExpression>
       </input>
       <output id="Output_1" label="Disease" name="disease" typeRef="string" />
-      <output id="OutputClause_0qr9qwk" label="Specialist" name="specialist" typeRef="string" />
+      <output id="OutputClause_0qr9qwk" label="Specialist" name="specialist" typeRef="string" biodi:width="279" />
       <rule id="DecisionRule_1tmzcqg">
         <inputEntry id="UnaryTests_0cy63pv">
           <text>Yes</text>
