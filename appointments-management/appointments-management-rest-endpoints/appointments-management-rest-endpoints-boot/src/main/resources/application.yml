@@ -26,3 +26,6 @@ camunda:
   bpm:
     database:
       schema-update: true
+    generic-properties:
+      properties:
+        historyTimeToLive: 3
