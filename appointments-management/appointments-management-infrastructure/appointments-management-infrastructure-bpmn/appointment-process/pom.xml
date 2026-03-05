@@ -4,20 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.ferdonof</groupId>
-        <artifactId>medical</artifactId>
+        <groupId>com.ferdonof.medical</groupId>
+        <artifactId>appointments-management-infrastructure-bpmn</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>appointments-management</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>appointments-management-application</module>
-        <module>appointments-management-domain</module>
-        <module>appointments-management-infrastructure</module>
-        <module>appointments-management-rest-endpoints</module>
-    </modules>
+    <artifactId>appointments-management-infrastructure-bpmn-appointment-process</artifactId>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
