@@ -1,14 +1,14 @@
 package com.ferdonof.medical.appointments.services.impl;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 import com.ferdonof.medical.appointments.entities.PatientSymptoms;
 import com.ferdonof.medical.appointments.ports.AppointmentsProcessManager;
 import com.ferdonof.medical.appointments.services.AppointmentReservationService;
 import com.ferdonof.medical.appointments.services.entities.AppointmentReservationRequest;
 import com.ferdonof.medical.appointments.services.entities.AppointmentReservationResponse;
 import lombok.RequiredArgsConstructor;
-
-import java.time.LocalDateTime;
-import java.util.UUID;
 
 @RequiredArgsConstructor
 public class AppointmentReservationServiceImpl implements AppointmentReservationService {
