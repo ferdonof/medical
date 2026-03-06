@@ -16,4 +16,12 @@ public enum SpecialistType {
 		this.description = name;
 	}
 
+	public static SpecialistType fromDescription(String description) {
+		for (final SpecialistType type : SpecialistType.values()) {
+			if (type.getDescription().equalsIgnoreCase(description)) {
+				return type;
+			}
+		}
+		throw new IllegalArgumentException("No SpecialistType with description: " + description);
+	}
 }
