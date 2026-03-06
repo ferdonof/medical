@@ -22,6 +22,15 @@ spring:
     change-log: classpath:/db/changelog/changelog.xml
 
 
+logging:
+  level:
+    root: WARN
+    com.ferdonof: INFO
+    org.camunda: WARN
+    org.springframework: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
 camunda:
   bpm:
     database:
