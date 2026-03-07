@@ -41,7 +41,7 @@
       <bpmn:incoming>Flow_16tjfs1</bpmn:incoming>
       <bpmn:outgoing>Flow_0clh7hv</bpmn:outgoing>
       <bpmn:timerEventDefinition id="TimerEventDefinition_0aaxara">
-        <bpmn:timeCycle xsi:type="bpmn:tFormalExpression">PT48H</bpmn:timeCycle>
+        <bpmn:timeDate xsi:type="bpmn:tFormalExpression">${reminderDate}</bpmn:timeDate>
       </bpmn:timerEventDefinition>
     </bpmn:intermediateCatchEvent>
     <bpmn:sequenceFlow id="Flow_0fu68qm" sourceRef="Activity_1w7qbiz" targetRef="Activity_1r5e2zk" />
@@ -52,7 +52,7 @@
     <bpmn:endEvent id="Event_1tkovzo" name="End (Cancelled)">
       <bpmn:incoming>Flow_07htjgc</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:serviceTask id="Activity_1kxvv9s" name="Cancel appointment" camunda:delegateExpression="${medicalGenericDelegate}">
+    <bpmn:serviceTask id="Activity_1kxvv9s" name="Cancel appointment" camunda:delegateExpression="${cancelAppointmentDelegate}">
       <bpmn:incoming>Flow_11o314z</bpmn:incoming>
       <bpmn:outgoing>Flow_0fv8dwo</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -71,7 +71,7 @@
     </bpmn:intermediateCatchEvent>
     <bpmn:sequenceFlow id="Flow_0x02x6y" sourceRef="Gateway_0ln17pl" targetRef="Event_1imfi1x" />
     <bpmn:sequenceFlow id="Flow_11o314z" sourceRef="Event_1imfi1x" targetRef="Activity_1kxvv9s" />
-    <bpmn:serviceTask id="Activity_1w7qbiz" name="Send reminder email" camunda:delegateExpression="${medicalGenericDelegate}">
+    <bpmn:serviceTask id="Activity_1w7qbiz" name="Send reminder email" camunda:delegateExpression="${sendConfirmationEmailDelegate}">
       <bpmn:incoming>Flow_0clh7hv</bpmn:incoming>
       <bpmn:outgoing>Flow_0fu68qm</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -80,12 +80,12 @@
       <bpmn:outgoing>Flow_1mkiayz</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:sequenceFlow id="Flow_1x60a6d" sourceRef="Activity_0qed2ze" targetRef="Event_12h3wyi" />
-    <bpmn:serviceTask id="Activity_0qed2ze" name="Mark as completed" camunda:delegateExpression="${medicalGenericDelegate}">
+    <bpmn:serviceTask id="Activity_0qed2ze" name="Mark as completed" camunda:delegateExpression="${completeAppointmentDelegate}">
       <bpmn:incoming>Flow_1mkiayz</bpmn:incoming>
       <bpmn:outgoing>Flow_1x60a6d</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="Flow_1avfv0r" sourceRef="Activity_1kjiz2s" targetRef="Activity_1ctrefp" />
-    <bpmn:serviceTask id="Activity_1ergxzu" name="Receive  appointment confirmation" camunda:delegateExpression="${medicalGenericDelegate}">
+    <bpmn:serviceTask id="Activity_1ergxzu" name="Receive  appointment confirmation" camunda:delegateExpression="${confirmAppointmentDelegate}">
       <bpmn:incoming>Flow_0fu5qt5</bpmn:incoming>
       <bpmn:outgoing>Flow_16tjfs1</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -103,7 +103,7 @@
     <bpmn:association id="Association_1hz667a" sourceRef="Event_1imfi1x" targetRef="TextAnnotation_0exbzgd" />
   </bpmn:process>
   <bpmn:message id="Message_1mnmhy7" />
-  <bpmn:message id="Message_1ujx3r0" name="ConfirmAppouintmentMessage" />
+  <bpmn:message id="Message_1ujx3r0" name="ConfirmAppointmentMessage" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="appointment_process">
       <bpmndi:BPMNEdge id="Flow_1avfv0r_di" bpmnElement="Flow_1avfv0r">
