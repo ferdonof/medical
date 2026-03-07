@@ -1,18 +1,17 @@
-package com.ferdonof.medical.appointments.services.impl;
+package com.ferdonof.medical.appointments.services;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 import com.ferdonof.medical.appointments.entities.PatientSymptoms;
-import com.ferdonof.medical.appointments.ports.AppointmentsProcessManager;
-import com.ferdonof.medical.appointments.services.AppointmentReservationService;
+import com.ferdonof.medical.appointments.ports.AppointmentsProcessStarterPort;
 import com.ferdonof.medical.appointments.services.entities.AppointmentReservationRequest;
 import com.ferdonof.medical.appointments.services.entities.AppointmentReservationResponse;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class AppointmentReservationServiceImpl implements AppointmentReservationService {
-	private final AppointmentsProcessManager processManager;
+	private final AppointmentsProcessStarterPort processManager;
 
 	@Override
 	public AppointmentReservationResponse execute(AppointmentReservationRequest request) {

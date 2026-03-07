@@ -1,21 +1,23 @@
 package com.ferdonof.medical.adapters;
 
-import java.util.Map;
-
-import com.ferdonof.medical.appointments.entities.PatientSymptoms;
-import com.ferdonof.medical.appointments.ports.AppointmentsProcessManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.Map;
+
 import org.camunda.bpm.engine.HistoryService;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.history.HistoricProcessInstance;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.springframework.stereotype.Service;
 
+import com.ferdonof.medical.appointments.entities.PatientSymptoms;
+import com.ferdonof.medical.appointments.ports.AppointmentsProcessStarterPort;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class AppointmentProcessManagerAdapter implements AppointmentsProcessManager {
+public class AppointmentProcessStarterAdapter implements AppointmentsProcessStarterPort {
 
 	private static final String PATIENT_ID = "patientId";
 	private static final String TEMPERATURE = "temperature";
