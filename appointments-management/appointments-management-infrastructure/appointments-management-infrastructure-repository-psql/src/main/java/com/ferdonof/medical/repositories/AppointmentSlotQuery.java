@@ -18,6 +18,11 @@ public enum AppointmentSlotQuery {
 					LIMIT 1
 				)
 				RETURNING id, doctor_id, patient_id, specialty, appointment_at, reserved_at, created_at, updated_at, status;
+			"""), UPDATE_APPOINTMENT_STATUS(
+			"""
+										UPDATE appointment_slots
+										SET status = :status, updated_at = NOW()
+										WHERE id = :slotId
 			""");
 
 	private final String sql;
