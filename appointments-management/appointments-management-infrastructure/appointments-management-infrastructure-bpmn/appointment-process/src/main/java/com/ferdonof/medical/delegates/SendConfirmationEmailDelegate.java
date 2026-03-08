@@ -16,11 +16,12 @@ public class SendConfirmationEmailDelegate implements JavaDelegate {
 
 		log.info("*************************************************************************************************************");
 		log.info("Sending email to patient with the following details:");
-		log.info("     Patient Id          :: {}", delegateExecution.getVariable("patientId"));
-		log.info("     SlotId              :: {}", delegateExecution.getVariable("slotId"));
-		log.info("     Doctor code         :: {}", delegateExecution.getVariable("doctorCode"));
-		log.info("     Appointment date    :: {}", delegateExecution.getVariable("appointmentDate"));
-		log.info("     Process instance id :: {}", delegateExecution.getProcessInstanceId());
+		log.info("     Patient Id           :: {}", delegateExecution.getVariable("patientId"));
+		log.info("     SlotId               :: {}", delegateExecution.getVariable("slotId"));
+		log.info("     Doctor code          :: {}", delegateExecution.getVariable("doctorCode"));
+		log.info("     Appointment date     :: {}", delegateExecution.getVariable("appointmentDate"));
+		log.info("     Should send reminder :: {}", delegateExecution.getVariable("shouldSendReminder"));
+		log.info("     Process instance id  :: {}", delegateExecution.getProcessInstanceId());
 		log.info("*************************************************************************************************************");
 
 	}

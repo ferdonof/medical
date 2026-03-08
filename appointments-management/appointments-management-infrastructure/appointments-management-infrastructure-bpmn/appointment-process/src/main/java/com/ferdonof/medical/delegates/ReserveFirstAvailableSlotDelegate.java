@@ -3,6 +3,7 @@ package com.ferdonof.medical.delegates;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -55,6 +56,8 @@ public class ReserveFirstAvailableSlotDelegate implements JavaDelegate {
 		final Date reminderAt = this.toDate(appointmentAt.minusDays(2));
 		delegateExecution.setVariable("reminderDate", reminderAt);
 
+		final boolean shouldSendReminder = reminderAt.after(Date.from(Instant.now()));
+		delegateExecution.setVariable("shouldSendReminder", shouldSendReminder);
 	}
 
 	private Date toDate(LocalDateTime localDateTime) {
