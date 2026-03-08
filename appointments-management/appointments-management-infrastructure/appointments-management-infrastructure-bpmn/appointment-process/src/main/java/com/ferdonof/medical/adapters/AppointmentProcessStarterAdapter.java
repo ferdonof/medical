@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.ferdonof.medical.appointments.entities.PatientSymptoms;
 import com.ferdonof.medical.appointments.ports.AppointmentsProcessStarterPort;
+import com.ferdonof.medical.commons.entities.ProcessResult;
 
 @Slf4j
 @Service
@@ -32,17 +33,16 @@ public class AppointmentProcessStarterAdapter implements AppointmentsProcessStar
 	private final HistoryService historyService;
 
 	@Override
-	public void startAppointmentProcess(PatientSymptoms symptoms) {
+	public ProcessResult startAppointmentProcess(PatientSymptoms symptoms) {
 		final ProcessInstance appointmentProcess = this.runtimeService.startProcessInstanceByKey("appointment_process",
 				this.toProcessVariables(symptoms));
 
 		final HistoricProcessInstance historic = this.historyService.createHistoricProcessInstanceQuery()
 				.processInstanceId(appointmentProcess.getProcessInstanceId()).singleResult();
 
-		final String processInstanceId = historic.getId();
+		log.info("Appointment process with ID: {} and status: {}", historic.getId(), historic.getState());
 
-		log.info("Appointment process with ID: {} and status: {}", processInstanceId, historic.getState());
-
+		return new ProcessResult(historic.getId(), historic.getState());
 	}
 
 	private Map<String, Object> toProcessVariables(PatientSymptoms symptoms) {

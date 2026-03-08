@@ -1,13 +1,12 @@
 package com.ferdonof.medical.appointments.services;
 
-import java.time.LocalDateTime;
-import java.util.UUID;
+import lombok.RequiredArgsConstructor;
 
 import com.ferdonof.medical.appointments.entities.PatientSymptoms;
 import com.ferdonof.medical.appointments.ports.AppointmentsProcessStarterPort;
 import com.ferdonof.medical.appointments.services.entities.AppointmentReservationRequest;
 import com.ferdonof.medical.appointments.services.entities.AppointmentReservationResponse;
-import lombok.RequiredArgsConstructor;
+import com.ferdonof.medical.commons.entities.ProcessResult;
 
 @RequiredArgsConstructor
 public class AppointmentReservationServiceImpl implements AppointmentReservationService {
@@ -15,9 +14,8 @@ public class AppointmentReservationServiceImpl implements AppointmentReservation
 
 	@Override
 	public AppointmentReservationResponse execute(AppointmentReservationRequest request) {
-		this.processManager.startAppointmentProcess(this.toSymptoms(request));
-		return new AppointmentReservationResponse(UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID(),
-				LocalDateTime.now());
+		final ProcessResult processResult = this.processManager.startAppointmentProcess(this.toSymptoms(request));
+		return new AppointmentReservationResponse(processResult.processId(), processResult.status());
 	}
 
 	private PatientSymptoms toSymptoms(AppointmentReservationRequest request) {
