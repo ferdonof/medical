@@ -8,5 +8,13 @@ import com.ferdonof.medical.appointments.entities.AppointmentSlot;
 import com.ferdonof.medical.commons.enums.SpecialistType;
 
 public interface AppointmentSlotRepositoryPort {
+
   Optional<AppointmentSlot> reserveFirstAvailableSlot(UUID patientId, SpecialistType specialistType, LocalDateTime appointmentAfter);
+
+	void confirmAppointment(UUID slotId);
+
+	void cancelAppointment(UUID slotId);
+
+	void completeAppointment(UUID slotId);
+
 }

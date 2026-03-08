@@ -1,21 +1,23 @@
 package com.ferdonof.medical.repositories;
 
+import lombok.RequiredArgsConstructor;
+
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
-import com.ferdonof.medical.appointments.entities.AppointmentSlot;
-import com.ferdonof.medical.appointments.ports.AppointmentSlotRepositoryPort;
-import com.ferdonof.medical.commons.enums.SpecialistType;
-import com.ferdonof.medical.mappers.AppointmentSlotRowMapper;
-import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.ferdonof.medical.appointments.entities.AppointmentSlot;
+import com.ferdonof.medical.appointments.enums.SlotStatus;
+import com.ferdonof.medical.commons.enums.SpecialistType;
+import com.ferdonof.medical.mappers.AppointmentSlotRowMapper;
+
 @Repository
 @RequiredArgsConstructor
-public class AppointmentSlotRepository implements AppointmentSlotRepositoryPort {
+public class AppointmentSlotRepository {
 
 	private final AppointmentSlotRowMapper rowMapper;
 
@@ -34,5 +36,11 @@ public class AppointmentSlotRepository implements AppointmentSlotRepositoryPort 
 		} catch (final Exception exception) {
 			return Optional.empty();
 		}
+	}
+
+	public void updateAppointmentStatus(final UUID slotId, SlotStatus status) {
+		final MapSqlParameterSource parameters = new MapSqlParameterSource().addValue("slotId", slotId)
+				.addValue("status", status.name());
+		this.jdbcTemplate.update(AppointmentSlotQuery.UPDATE_APPOINTMENT_STATUS.getSql(), parameters);
 	}
 }
