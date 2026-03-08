@@ -36,18 +36,13 @@
 		<postgresql.version>42.7.3</postgresql.version>
 		<testcontainers.version>1.19.8</testcontainers.version>
 		<mapstruct.version>1.5.5.Final</mapstruct.version>
+		<camunda-bpm-assert.version>15.0.0</camunda-bpm-assert.version>
+		<camunda-bpm-process-test-coverage.version>0.4.0</camunda-bpm-process-test-coverage.version>
+		<camunda-bpm-spring-boot-starter-webapp.version>7.24.0</camunda-bpm-spring-boot-starter-webapp.version>
 	</properties>
 
 	<dependencyManagement>
 	    <dependencies>
-<!--	      <dependency>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-dependencies</artifactId>
-		<version>3.5.5</version>
-		<type>pom</type>
-		<scope>import</scope>
-	      </dependency>
--->
 			<dependency>
 				<groupId>org.camunda.bpm</groupId>
 				<artifactId>camunda-bom</artifactId>
@@ -75,7 +70,19 @@
 			<dependency>
 				<groupId>org.camunda.bpm.springboot</groupId>
 				<artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
-				<version>7.24.0</version>
+				<version>${camunda-bpm-spring-boot-starter-webapp.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.camunda.bpm.assert</groupId>
+				<artifactId>camunda-bpm-assert</artifactId>
+				<version>${camunda-bpm-assert.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.camunda.bpm.extension</groupId>
+				<artifactId>camunda-bpm-process-test-coverage</artifactId>
+				<version>${camunda-bpm-process-test-coverage.version}</version>
+				<scope>test</scope>
 			</dependency>
 		</dependencies>
     </dependencyManagement>
