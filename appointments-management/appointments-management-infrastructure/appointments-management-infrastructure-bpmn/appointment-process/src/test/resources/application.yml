@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:camunda-test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  sql:
+    init:
+      platform: h2
+
+camunda:
+  bpm:
+    auto-deployment-enabled: false
+    database:
+      schema-update: true
+    job-execution:
+      enabled: false
+
+logging:
+  level:
+    root: WARN
+    com.ferdonof: DEBUG
+    org.camunda: WARN
+

@@ -5,24 +5,25 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.ferdonof</groupId>
-        <artifactId>medical</artifactId>
+        <artifactId>appointments-management-rest-endpoints</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>appointments-management</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>appointments-management-application</module>
-        <module>appointments-management-domain</module>
-        <module>appointments-management-infrastructure</module>
-        <module>appointments-management-rest-endpoints</module>
-    </modules>
+    <artifactId>appointments-management-rest-endpoints-boot</artifactId>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.ferdonof.medical</groupId>
+            <artifactId>appointments-management-rest-endpoints-handle-appointments</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>

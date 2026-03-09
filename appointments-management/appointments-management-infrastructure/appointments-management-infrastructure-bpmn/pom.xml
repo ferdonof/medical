@@ -5,18 +5,16 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.ferdonof</groupId>
-        <artifactId>medical</artifactId>
+        <artifactId>appointments-management-infrastructure</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>appointments-management</artifactId>
+    <groupId>com.ferdonof.medical</groupId>
+    <artifactId>appointments-management-infrastructure-bpmn</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>appointments-management-application</module>
-        <module>appointments-management-domain</module>
-        <module>appointments-management-infrastructure</module>
-        <module>appointments-management-rest-endpoints</module>
+        <module>appointment-process</module>
     </modules>
 
     <properties>
@@ -24,5 +22,18 @@
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.camunda.bpm.assert</groupId>
+            <artifactId>camunda-bpm-assert</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.camunda.bpm.extension</groupId>
+            <artifactId>camunda-bpm-process-test-coverage</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 </project>

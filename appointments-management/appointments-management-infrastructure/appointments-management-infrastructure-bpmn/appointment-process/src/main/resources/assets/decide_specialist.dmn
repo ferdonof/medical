@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="decide_specialist_dmn" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.12.0">
+  <decision id="decide_specialist" name="Specialist decision">
+    <decisionTable id="DecisionTable_0smm6fs" hitPolicy="FIRST">
+      <input id="Input_1" label="Has Fever" biodi:width="192" camunda:inputVariable="hasFever">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text>if temperature > 39.0 then "High" else if temperature > 37.5 then "Yes" else if temperature > 37.0 then "Low-Grade" else "No"</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_1lmuvaw">
+          <text>"Yes","No","High","Low-Grade"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_0perjh0" label="Has Cough" camunda:inputVariable="hasCough">
+        <inputExpression id="LiteralExpression_0nbbjmi" typeRef="string">
+          <text>if coughFrequencyPerHour > 30 then "Chronic" else if coughFrequencyPerHour > 10 then "Yes" else "No"</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_19u07yu">
+          <text>"Yes","No","Chronic"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_1r4r4rb" label="Has Chest Pain" biodi:width="192" camunda:inputVariable="hasChestPain">
+        <inputExpression id="LiteralExpression_0jlh9my" typeRef="string">
+          <text>chestPainType</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_13d9oag">
+          <text>"Yes","No","Sometimes","Severe"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_1of91gl" label="Has Fatigue" camunda:inputVariable="hasFatigue">
+        <inputExpression id="LiteralExpression_0ria5d9" typeRef="string">
+          <text>fatigueType</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_1mgdm8n">
+          <text>"Yes","No","Severe"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_1yq2klq" label="Has weight Loss" camunda:inputVariable="withWeightLoss">
+        <inputExpression id="LiteralExpression_1ez737j" typeRef="boolean">
+          <text>hasWeightLoss</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1nytqxt" label="Has Neck Stiffness" camunda:inputVariable="withNeckStiffness">
+        <inputExpression id="LiteralExpression_1cb9h8u" typeRef="boolean">
+          <text>hasNeckStiffness</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Disease" name="disease" typeRef="string" />
+      <output id="OutputClause_0qr9qwk" label="Specialist" name="specialist" typeRef="string" biodi:width="279" />
+      <rule id="DecisionRule_1tmzcqg">
+        <inputEntry id="UnaryTests_0cy63pv"><text>"Yes"</text></inputEntry>
+        <inputEntry id="UnaryTests_14khtka"><text>"Yes"</text></inputEntry>
+        <inputEntry id="UnaryTests_00xiixz"><text>"No"</text></inputEntry>
+        <inputEntry id="UnaryTests_14pjn4r"><text>"Yes"</text></inputEntry>
+        <inputEntry id="UnaryTests_1in0rx6"><text>false</text></inputEntry>
+        <inputEntry id="UnaryTests_0c0tvqs"><text>false</text></inputEntry>
+        <outputEntry id="LiteralExpression_1w0ld4v"><text>"Influenza"</text></outputEntry>
+        <outputEntry id="LiteralExpression_0wlcnzz"><text>"General Practitioner"</text></outputEntry>
+      </rule>
+      <rule id="DecisionRule_1dtpzhk">
+        <inputEntry id="UnaryTests_0plogyt"><text>"Yes"</text></inputEntry>
+        <inputEntry id="UnaryTests_1wvugxg"><text>"Yes"</text></inputEntry>
+        <inputEntry id="UnaryTests_0p7lh4j"><text>"Sometimes"</text></inputEntry>
+        <inputEntry id="UnaryTests_0cma9uv"><text>"Yes"</text></inputEntry>
+        <inputEntry id="UnaryTests_0bl5ood"><text>false</text></inputEntry>
+        <inputEntry id="UnaryTests_1w6fndu"><text>false</text></inputEntry>
+        <outputEntry id="LiteralExpression_13atb8g"><text>"Covid-19"</text></outputEntry>
+        <outputEntry id="LiteralExpression_1e3qzm2"><text>"Pulmonologist"</text></outputEntry>
+      </rule>
+      <rule id="DecisionRule_19pl9x1">
+        <inputEntry id="UnaryTests_1y7icw3"><text>"Yes"</text></inputEntry>
+        <inputEntry id="UnaryTests_14f07d1"><text>"Yes"</text></inputEntry>
+        <inputEntry id="UnaryTests_1n1t3yo"><text>"Yes"</text></inputEntry>
+        <inputEntry id="UnaryTests_1qfpceu"><text>"Yes"</text></inputEntry>
+        <inputEntry id="UnaryTests_1ytq7kw"><text>false</text></inputEntry>
+        <inputEntry id="UnaryTests_0x7qh75"><text>false</text></inputEntry>
+        <outputEntry id="LiteralExpression_1xudn0z"><text>"Pneumonia"</text></outputEntry>
+        <outputEntry id="LiteralExpression_0kvdk00"><text>"Pulmonologist"</text></outputEntry>
+      </rule>
+      <rule id="DecisionRule_0hvruyj">
+        <inputEntry id="UnaryTests_0bpt06k"><text>"Low-Grade"</text></inputEntry>
+        <inputEntry id="UnaryTests_0fxcx48"><text>"Chronic"</text></inputEntry>
+        <inputEntry id="UnaryTests_0n4y9mi"><text>"Sometimes"</text></inputEntry>
+        <inputEntry id="UnaryTests_0mx90q7"><text>"Yes"</text></inputEntry>
+        <inputEntry id="UnaryTests_11smsc8"><text>true</text></inputEntry>
+        <inputEntry id="UnaryTests_0ecotrj"><text>false</text></inputEntry>
+        <outputEntry id="LiteralExpression_0kjjioa"><text>"Tuberculosis"</text></outputEntry>
+        <outputEntry id="LiteralExpression_0tkvklr"><text>"Infectious Disease Specialist"</text></outputEntry>
+      </rule>
+      <rule id="DecisionRule_1ici09b">
+        <inputEntry id="UnaryTests_0nfdk54"><text>"Yes"</text></inputEntry>
+        <inputEntry id="UnaryTests_1ihid81"><text>"No"</text></inputEntry>
+        <inputEntry id="UnaryTests_1ovn2l3"><text>"No"</text></inputEntry>
+        <inputEntry id="UnaryTests_0aw0pex"><text>"Severe"</text></inputEntry>
+        <inputEntry id="UnaryTests_1s88v1t"><text>false</text></inputEntry>
+        <inputEntry id="UnaryTests_1qjx1ck"><text>false</text></inputEntry>
+        <outputEntry id="LiteralExpression_0ktd4po"><text>"Mononucleosis"</text></outputEntry>
+        <outputEntry id="LiteralExpression_1y8q0ma"><text>"Internal Medicine"</text></outputEntry>
+      </rule>
+      <rule id="DecisionRule_000np9e">
+        <inputEntry id="UnaryTests_0rwbnk0"><text>"High"</text></inputEntry>
+        <inputEntry id="UnaryTests_17piy1o"><text>"No"</text></inputEntry>
+        <inputEntry id="UnaryTests_0tor3x8"><text>"No"</text></inputEntry>
+        <inputEntry id="UnaryTests_0rzi66a"><text>"Yes"</text></inputEntry>
+        <inputEntry id="UnaryTests_1u5fxoh"><text>false</text></inputEntry>
+        <inputEntry id="UnaryTests_0ugqoik"><text>true</text></inputEntry>
+        <outputEntry id="LiteralExpression_1kqwqxi"><text>"Meningitis"</text></outputEntry>
+        <outputEntry id="LiteralExpression_0csnf2j"><text>"Neurologist"</text></outputEntry>
+      </rule>
+      <rule id="DecisionRule_0nm50hh">
+        <inputEntry id="UnaryTests_1ue2nw9"><text>"No"</text></inputEntry>
+        <inputEntry id="UnaryTests_0vywwoq"><text>"No"</text></inputEntry>
+        <inputEntry id="UnaryTests_0243tw1"><text>"Severe"</text></inputEntry>
+        <inputEntry id="UnaryTests_1wxt0nb"><text>"Yes"</text></inputEntry>
+        <inputEntry id="UnaryTests_0klor3i"><text>false</text></inputEntry>
+        <inputEntry id="UnaryTests_034lxju"><text>false</text></inputEntry>
+        <outputEntry id="LiteralExpression_0jfybbp"><text>"Myocardial Infarction"</text></outputEntry>
+        <outputEntry id="LiteralExpression_1paknp1"><text>"Cardiologist"</text></outputEntry>
+      </rule>
+      <rule id="DecisionRule_1soept8">
+        <inputEntry id="UnaryTests_0gamaou"><text>"No"</text></inputEntry>
+        <inputEntry id="UnaryTests_0w452g9"><text>"No"</text></inputEntry>
+        <inputEntry id="UnaryTests_03tr84w"><text>"Yes"</text></inputEntry>
+        <inputEntry id="UnaryTests_005ijub"><text>"Yes"</text></inputEntry>
+        <inputEntry id="UnaryTests_1i907y5"><text>false</text></inputEntry>
+        <inputEntry id="UnaryTests_0qdf0z3"><text>false</text></inputEntry>
+        <outputEntry id="LiteralExpression_0rug9ii"><text>"Pericarditis"</text></outputEntry>
+        <outputEntry id="LiteralExpression_0dip176"><text>"Cardiologist"</text></outputEntry>
+      </rule>
+      <rule id="DecisionRule_1ytsb8l">
+        <inputEntry id="UnaryTests_1cmu73r"><text>"No"</text></inputEntry>
+        <inputEntry id="UnaryTests_11p8xhe"><text>"No"</text></inputEntry>
+        <inputEntry id="UnaryTests_1hgdk1y"><text>"Sometimes"</text></inputEntry>
+        <inputEntry id="UnaryTests_059kwh3"><text>"Yes"</text></inputEntry>
+        <inputEntry id="UnaryTests_0026ylz"><text>false</text></inputEntry>
+        <inputEntry id="UnaryTests_0oiwh3i"><text>false</text></inputEntry>
+        <outputEntry id="LiteralExpression_0xlcrpt"><text>"Panic Attack"</text></outputEntry>
+        <outputEntry id="LiteralExpression_0gq0xst"><text>"Psychiatrist"</text></outputEntry>
+      </rule>
+      <rule id="DecisionRule_00j2e6i">
+        <inputEntry id="UnaryTests_0ec00hl"><text>"No"</text></inputEntry>
+        <inputEntry id="UnaryTests_19nv9oy"><text>"No"</text></inputEntry>
+        <inputEntry id="UnaryTests_0hkdcn5"><text>"No"</text></inputEntry>
+        <inputEntry id="UnaryTests_0yay0ag"><text>"Yes"</text></inputEntry>
+        <inputEntry id="UnaryTests_0r18rgv"><text>true</text></inputEntry>
+        <inputEntry id="UnaryTests_1mcwmin"><text>false</text></inputEntry>
+        <outputEntry id="LiteralExpression_0tih4md"><text>"Hyperthyroidism"</text></outputEntry>
+        <outputEntry id="LiteralExpression_1o5uahj"><text>"Endocrinologist"</text></outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="decide_specialist">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

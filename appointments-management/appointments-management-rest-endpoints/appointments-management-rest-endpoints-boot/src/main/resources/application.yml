@@ -1,0 +1,40 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+spring:
+  application:
+    name: medical
+  datasource:
+    url: jdbc:postgresql://localhost:5433/medical
+    username: postgres
+    password: pgmedical
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  liquibase:
+    change-log: classpath:/db/changelog/changelog.xml
+
+
+logging:
+  level:
+    root: WARN
+    com.ferdonof: INFO
+    org.camunda: WARN
+    org.springframework: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+camunda:
+  bpm:
+    database:
+      schema-update: true
+    generic-properties:
+      properties:
+        historyTimeToLive: 3
