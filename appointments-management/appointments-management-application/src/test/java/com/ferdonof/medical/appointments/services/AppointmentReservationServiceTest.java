@@ -1,12 +1,13 @@
 package com.ferdonof.medical.appointments.services;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 import com.ferdonof.medical.appointments.entities.PatientSymptoms;
@@ -30,27 +31,35 @@ class AppointmentReservationServiceTest {
 	@Test
 	void execute_shouldCallStartAppointmentProcessPort() {
 
-		when(this.processManager.startAppointmentProcess(any())).thenReturn(new ProcessResult("process-id", "ACTIVE"));
+		when(this.processManager.startAppointmentProcess(any()))
+				.thenReturn(Optional.of(new ProcessResult("process-id", "ACTIVE")));
 
 		final AppointmentReservationResponse response = this.useCase.execute(getRequest());
 
 		verify(this.processManager).startAppointmentProcess(mockedSymptoms());
 
 		assertThat(response).isNotNull();
-		assertThat(response).isEqualTo(
-				AppointmentReservationResponse.builder().appointmentId("process-id").status("ACTIVE").build());
+		assertThat(response).isEqualTo(new AppointmentReservationResponse("process-id", "ACTIVE"));
 
+	}
+
+	@Test
+	void execute_shouldThrowWhenRequestIsNull() {
+		assertThatThrownBy(() -> this.useCase.execute(null)).isInstanceOf(NullPointerException.class)
+				.hasMessageContaining("request must not be null");
+	}
+
+	@Test
+	void execute_shouldThrowWhenProcessResultIsEmpty() {
+		when(this.processManager.startAppointmentProcess(any())).thenReturn(Optional.empty());
+
+		assertThatThrownBy(() -> this.useCase.execute(getRequest())).isInstanceOf(IllegalStateException.class)
+				.hasMessageContaining("Appointment process could not be started");
 	}
 
 	private static AppointmentReservationRequest getRequest() {
-		return AppointmentReservationRequest.builder().patientId(PATIENT_ID).temperature(37.5).coughFrequencyPerHour(3)
-				.chestPainType(ChestPainType.SEVERE).fatigueType(FatigueType.YES).hasWeightLoss(true)
-				.hasNeckStiffness(false).build();
-	}
-
-	private static Map<String, Object> getRequestMap() {
-		return Map.of("patientId", PATIENT_ID, "temperature", 37.5, "coughFrequencyPerHour", 3, "chestPainType",
-				ChestPainType.SEVERE, "fatigueType", FatigueType.YES, "hasWeightLoss", true, "hasNeckStiffness", false);
+		return new AppointmentReservationRequest(PATIENT_ID, 37.5, 3, ChestPainType.SEVERE, FatigueType.YES, true,
+				false);
 	}
 
 	private static PatientSymptoms mockedSymptoms() {
