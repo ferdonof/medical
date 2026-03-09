@@ -46,10 +46,15 @@ public class AppointmentProcessStarterAdapter implements AppointmentsProcessStar
 	}
 
 	private Map<String, Object> toProcessVariables(PatientSymptoms symptoms) {
-		return Map.of(PATIENT_ID, symptoms.patientId(), TEMPERATURE, symptoms.temperature(), COUGH_FREQUENCY,
-				symptoms.coughFrequencyPerHour(), CHEST_PAIN_TYPE, symptoms.chestPainType().getDescription(),
-				FATIGUE_TYPE, symptoms.fatigueType().getDescription(), WEIGHT_LOSS, symptoms.hasWeightLoss(),
-				NECK_STIFFNESS, symptoms.hasNeckStiffness());
+		return Map.of(
+				PATIENT_ID, symptoms.patientId(),
+				TEMPERATURE, symptoms.temperature(),
+				COUGH_FREQUENCY, symptoms.coughFrequencyPerHour(),
+				CHEST_PAIN_TYPE, symptoms.chestPainType().getDescription(),
+				FATIGUE_TYPE, symptoms.fatigueType().getDescription(),
+				WEIGHT_LOSS, symptoms.hasWeightLoss(),
+				NECK_STIFFNESS, symptoms.hasNeckStiffness()
+		);
 	}
 
 }
